@@ -13,6 +13,8 @@ function App() {
     setIsModalOpen(false);
   };
 
+
+
   const handleModalClick = (e) => {
     e.stopPropagation(); // Prevent closing when clicking inside modal
   };
@@ -25,10 +27,23 @@ function App() {
     const phone = document.getElementById("phone").value.trim();
     const dob = document.getElementById("dob").value;
 
-    if (!username || !email || !phone || !dob) {
-      alert("Please fill all the fields.");
-      return;
-    }
+    if (!username) {
+  alert("Please fill all the fields.");
+  return;
+}
+if (!email) {
+  alert("Please fill all the fields.");
+  return;
+}
+if (!phone) {
+  alert("Please fill all the fields.");
+  return;
+}
+if (!dob) {
+  alert("Please fill all the fields.");
+  return;
+}
+
 
     if (!email.includes("@")) {
       alert("Invalid email. Please check your email address.");
