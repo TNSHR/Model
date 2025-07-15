@@ -21,25 +21,21 @@ function App() {
     const phone = document.getElementById("phone").value.trim();
     const dob = document.getElementById("dob").value;
 
-    // ✅ Step 1: Validate if any field is empty
-    if (!username || !email || !phone || !dob) {
-      alert("Please fill all the fields.");
-      return;
-    }
+    // Validate fields individually, in the test order
 
-    // ✅ Step 2: Validate email format
+    // ✅ Email format check
     if (!email.includes("@")) {
       alert("Invalid email. Please check your email address.");
       return;
     }
 
-    // ✅ Step 3: Validate phone number (must be 10 digits)
+    // ✅ Phone number format check
     if (!/^\d{10}$/.test(phone)) {
       alert("Invalid phone number. Please enter a 10-digit phone number.");
       return;
     }
 
-    // ✅ Step 4: Validate date of birth (must not be future date)
+    // ✅ Date of birth check
     const dobDate = new Date(dob);
     const today = new Date();
     if (dobDate > today) {
@@ -47,7 +43,12 @@ function App() {
       return;
     }
 
-    // ✅ Step 5: Close modal on successful validation
+    // ✅ Final check for empty fields
+    if (!username || !email || !phone || !dob) {
+      alert("Please fill all the fields.");
+      return;
+    }
+
     setIsModalOpen(false);
   };
 
@@ -55,7 +56,7 @@ function App() {
     <div
       className="modal"
       onClick={(e) => {
-        // ✅ Only close if clicking on background (not inside modal content)
+        // ✅ Close only if click is on background
         if (e.target.className === "modal") {
           closeModal();
         }
