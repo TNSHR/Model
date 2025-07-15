@@ -21,21 +21,16 @@ function App() {
     const phone = document.getElementById("phone").value.trim();
     const dob = document.getElementById("dob").value;
 
-    // Validate fields individually, in the test order
-
-    // ✅ Email format check
     if (!email.includes("@")) {
       alert("Invalid email. Please check your email address.");
       return;
     }
 
-    // ✅ Phone number format check
     if (!/^\d{10}$/.test(phone)) {
       alert("Invalid phone number. Please enter a 10-digit phone number.");
       return;
     }
 
-    // ✅ Date of birth check
     const dobDate = new Date(dob);
     const today = new Date();
     if (dobDate > today) {
@@ -43,7 +38,6 @@ function App() {
       return;
     }
 
-    // ✅ Final check for empty fields
     if (!username || !email || !phone || !dob) {
       alert("Please fill all the fields.");
       return;
@@ -54,10 +48,9 @@ function App() {
 
   return (
     <div
-      className="modal"
+      id="root"
       onClick={(e) => {
-        // ✅ Close only if click is on background
-        if (e.target.className === "modal") {
+        if (isModalOpen) {
           closeModal();
         }
       }}
@@ -66,29 +59,31 @@ function App() {
       <button onClick={openModal}>Open Form</button>
 
       {isModalOpen && (
-        <div className="modal-content" onClick={(e) => e.stopPropagation()}>
-          <h2>Fill Details</h2>
-          <form onSubmit={handleSubmit}>
-            <div>
-              <label htmlFor="username">Username:</label>
-              <input type="text" id="username" />
-            </div>
-            <div>
-              <label htmlFor="email">Email Address:</label>
-              <input type="text" id="email" />
-            </div>
-            <div>
-              <label htmlFor="phone">Phone Number:</label>
-              <input type="text" id="phone" />
-            </div>
-            <div>
-              <label htmlFor="dob">Date of Birth:</label>
-              <input type="date" id="dob" />
-            </div>
-            <button type="submit" className="submit-button">
-              Submit
-            </button>
-          </form>
+        <div className="modal" onClick={(e) => e.stopPropagation()}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <h2>Fill Details</h2>
+            <form onSubmit={handleSubmit}>
+              <div>
+                <label htmlFor="username">Username:</label>
+                <input type="text" id="username" />
+              </div>
+              <div>
+                <label htmlFor="email">Email Address:</label>
+                <input type="text" id="email" />
+              </div>
+              <div>
+                <label htmlFor="phone">Phone Number:</label>
+                <input type="text" id="phone" />
+              </div>
+              <div>
+                <label htmlFor="dob">Date of Birth:</label>
+                <input type="date" id="dob" />
+              </div>
+              <button type="submit" className="submit-button">
+                Submit
+              </button>
+            </form>
+          </div>
         </div>
       )}
     </div>
